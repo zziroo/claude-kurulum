@@ -21,6 +21,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/sesli-oku.mjs\"",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -29,6 +38,17 @@
           {
             "type": "command",
             "command": "node \"$HOME/.claude/hooks/ajan-tavani.mjs\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/sesli-oku.mjs\"",
             "timeout": 5
           }
         ]

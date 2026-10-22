@@ -41,6 +41,7 @@ Yalnızca kanca bağlantılarını içerir (JSON yorum desteklemediği için aç
 - `SessionStart` → `hooks/oturum-baslangici.mjs`: oturum açılışında bağlam notu.
 - `UserPromptSubmit` → `hooks/baglam-uyarisi.mjs`: bağlam 300k'yı geçince ya da eski büyük oturum açılınca uyarı.
 - `PostToolUse` → `hooks/ajan-tavani.mjs`: ajan bağlam/çağrı/ekran görüntüsü tavanı hatırlatması.
+- `UserPromptSubmit` + `Stop` → `hooks/sesli-oku.mjs`: "oku" yazınca önceki cevabı Ahenk Cep ile sesli okur; `~/.claude/sesli/acik` varsa her cevabı kendiliğinden okur (aşağıda).
 
 Yollar `$HOME/.claude/hooks/...` biçimindedir, makineye özel değildir. İzin listesi (`permissions.allow`) kişiye özeldir (ör. ssh kuralları) ve repoya girmez; her makinede kendi `settings.json`'ında tutulur.
 
@@ -58,9 +59,25 @@ claude/
     bitir/                     kaydet + oturumu kapat
     pano/                      yerel panoyu açar
     kod-haritasi/              docs/kod-haritasi.md şablonu ve harita.mjs
+    sesli/                     /sesli oku|dur|otomatik aç|kapat|durum|dene|cümle N
+  sesli/                       Ahenk Cep sesli okuma: oku.py, kur.sh (venv), ayar.json; .venv ve durum dosyaları git dışı
   orchestration-report/        token/maliyet/oturum raporu, pano sunucusu, canlı görünüm
     README.md                  betiklerin ayrıntılı belgesi
 ```
+
+## Sesli okuma (isteğe bağlı)
+
+Cevapları yerel Türkçe TTS ile hoparlörden okur: [Ahenk Cep](https://github.com/ozguradmin/ahenk-turkish-tts)
+(8.6M parametre, CPU, ses ~2 sn'de başlar; ağırlıklar CC BY 4.0). Yalnız macOS (`afplay`).
+
+```bash
+~/.claude/sesli/kur.sh     # uv ile Python 3.12 venv, torch (~200 MB) ve model (34 MB)
+```
+
+Okuma tuşu gibi çalışır: bir cevaptan sonra `oku` (ya da `/sesli oku`) yazınca o cevap okunur, `dur` keser,
+`oku hepsini` kırpmadan okur. Kanca metni markdown ve kod bloklarından arındırır, `ayar.json`'daki sınıra göre
+kırpar (varsayılan 6 cümle / 700 karakter, sonuna "Gerisi ekranda" ekler) ve arka planda okutur; yeni okuma
+öncekini keser. `/sesli otomatik aç` ile her cevap kendiliğinden okunur (alt ajanlar hariç), `otomatik kapat` ile durur.
 
 ## Kendine uyarlama
 

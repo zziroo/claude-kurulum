@@ -20,7 +20,7 @@ done
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 KAYNAK="$REPO/claude"
 HEDEF="${CLAUDE_DIZINI:-$HOME/.claude}"
-GIRDILER=(CLAUDE.md hooks agents skills orchestration-report)
+GIRDILER=(CLAUDE.md hooks agents skills orchestration-report sesli)
 ZAMAN="$(date +%Y%m%d-%H%M%S)"
 
 yap() {
