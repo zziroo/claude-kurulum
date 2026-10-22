@@ -1,0 +1,7 @@
+{
+  "aciklama": "pano.mjs --artifact çıktısında birebir değiştirilecek dizeler (yerel panoya dokunmaz). Bu dosyayı yayin-maskeler.json adıyla kopyala ve kendi dizelerini ekle; gerçek dosya .gitignore'dadır.",
+  "maskeler": [
+    { "bul": "AuthKey_XXXXXXXXXX", "yerine": "AuthKey_[APPLE-KEY-ID]" },
+    { "bul": "Ad Soyad", "yerine": "[kişi]" }
+  ]
+}

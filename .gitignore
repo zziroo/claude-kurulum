@@ -1,0 +1,7 @@
+# Kişisel çıktı ve veri: asla repoya girmez
+claude/orchestration-report/out/
+# Kişisel yayın maskeleri (hesap kimlikleri, isimler); örneği: yayin-maskeler.ornek.json
+claude/orchestration-report/pano/yayin-maskeler.json
+*.bak
+.DS_Store
+node_modules/
